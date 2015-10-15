@@ -1,0 +1,107 @@
+server:
+  applicationConnectors:
+  - type: http
+    port: 9010
+  adminConnectors:
+  - type: http
+    port: 9011
+  requestLog:
+    appenders: []
+
+version: 3
+
+url: http://accounts.mlx.com
+logo: https://assets-cdn.github.com/images/modules/dashboard/bootcamp/octocat_fork.png
+
+jwt:
+  # who creates the token and signs it
+  issuer: accounts.mlx.com
+  # to whom the token is intended to be sent
+  audience: accounts.mlx.com
+  keyId: accounts.mlx.com
+  authenticationSecret: 1
+  encryptionKey:
+    alg: RS512
+    d: 1
+    e: 2
+    n: 3
+    kty: RSA
+    use: sig
+    kid: accounts.mlx.com
+
+mixpanel:
+  token: 1
+
+aws:
+  s3:
+    domain: https://s3.amazonaws.com/
+    accessKey: 1
+    secretKey: 2
+    bucket: 3
+  ses:
+    accessKey: 1
+    secretKey: 2
+    from: mlx <do-not-reply@grr.la>
+    systemAlertReceiver: system-alert@grr.la
+
+administrators:
+  - mlx-admin@grr.la
+
+oauth:
+  success: http://mlx.com
+  setup: http://mlx.com/setup
+  issue: http://mlx.com/oauth-issue
+  facebook:
+    id: 1
+    secret: 2
+  github:
+    id: 1
+    secret: 2
+  google:
+    id: 1
+    secret: 2
+  linkedIn:
+    id: 1
+    secret: 2
+
+db:
+  # the name of your JDBC driver
+  driverClass: org.postgresql.Driver
+
+  # the username
+  user: mlx_accounts
+
+  # the password
+  password: mlx_accounts
+
+  # the JDBC URL
+  url: jdbc:postgresql://localhost:5432/mlx_accounts
+
+  # any properties specific to your JDBC driver:
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.PostgreSQL82Dialect
+    hibernate.cache.use_second_level_cache: true
+    hibernate.cache.use_query_cache: true
+    hibernate.cache.provider_class: org.hibernate.cache.EhCacheProvider
+    hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+    hibernate.temp.use_jdbc_metadata_defaults: false
+    hibernate.show_sql: true
+    hibernate.c3p0.min_size: 5
+    hibernate.c3p0.max_size: 20
+    hibernate.c3p0.timeout: 1800
+    hibernate.c3p0.max_statements: 50
+    hibernate.hbm2ddl.auto: update
+    validationQuery: "SELECT 1"
+    maxWaitForConnection: 1s
+    checkConnectionWhileIdle: true
+    removeAbandoned: true
+
+sundial:
+  thread-pool-size: 4
+  shutdown-on-unload: true
+  wait-on-shutdown: false
+  start-delay-seconds: 10
+  start-scheduler-on-load: true
+  global-lock-on-load: false
+  annotated-jobs-package-name: com.mlx.accounts.jobs

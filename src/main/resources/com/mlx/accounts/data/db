@@ -1,0 +1,13 @@
+drop database if exists ti;
+drop role if exists "ti";
+drop role if exists "ti-ro";
+drop role if exists "ti-rw";
+
+CREATE ROLE ti LOGIN PASSWORD 'ti';
+create role "ti-ro";
+create role "ti-rw";
+CREATE DATABASE ti WITH OWNER = ti CONNECTION LIMIT = -1;
+
+CREATE SCHEMA AUTHORIZATION ti;
+GRANT ALL ON SCHEMA ti TO ti;
+COMMENT ON SCHEMA ti IS 'This schema stores all ti tables';
